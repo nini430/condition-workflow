@@ -67,5 +67,4 @@ jobs:
           path: dist
   deploy:
     needs: build
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/reuse.yaml
