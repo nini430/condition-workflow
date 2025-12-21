@@ -46,6 +46,7 @@ jobs:
           path: test.json
   build:
     needs: test
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Get code
