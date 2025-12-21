@@ -6,6 +6,10 @@ jobs:
       matrix:
         node-version: [12, 14]
         operating-system: [ubuntu-slim, windows-latest]
+        include:
+          - node-version: 16
+        exclude:
+          - operating-system: ubuntu-slim
     runs-on: ubuntu-latest
     steps:
       - name: get the code
