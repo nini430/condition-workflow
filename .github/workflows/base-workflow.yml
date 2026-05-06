@@ -37,10 +37,9 @@ jobs:
         run: npm install
       - name: Test code
         id: npm-tests
-        if: always()
-        run: echo "Test outcome ${{ steps.npm-tests.outcome }}"
+        run: npm run test
       - name: Upload test report
-        if: always()
+        if: ${{ steps.npm-tests.outcome == 'failure' }}
         uses: actions/upload-artifact@v6
         with:
           name: test-report
