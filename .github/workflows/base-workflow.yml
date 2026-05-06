@@ -38,6 +38,8 @@ jobs:
       - name: Test code
         id: npm-tests
         run: npm run test
+      - name: get step result
+        run: echo "Test outcome ${{ steps.npm-tests.outcome }}"
       - name: Upload test report
         if: ${{ steps.npm-tests.outcome == 'failure' }}
         uses: actions/upload-artifact@v6
