@@ -39,6 +39,7 @@ jobs:
         id: npm-tests
         run: npm run test
       - name: get step result
+        if: always()
         run: echo "Test outcome ${{ steps.npm-tests.outcome }}"
       - name: Upload test report
         if: ${{ steps.npm-tests.outcome == 'failure' }}
