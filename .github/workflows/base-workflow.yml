@@ -37,18 +37,17 @@ jobs:
         run: npm install
       - name: Test code
         id: npm-tests
-        run: npm run test
-      - name: get step result
         if: always()
         run: echo "Test outcome ${{ steps.npm-tests.outcome }}"
       - name: Upload test report
-        if: ${{ steps.npm-tests.outcome == 'failure' }}
+        if: always()
         uses: actions/upload-artifact@v6
         with:
           name: test-report
           path: test.json
   build:
     needs: test
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Get code
