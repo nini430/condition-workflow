@@ -25,4 +25,4 @@ jobs:
         run: echo  "Artifact name ${{ inputs.artifact-name }}"
       - name: output the output
         id: set-output
-        run: echo "result=success" >> $GITHUB_OUTPUT
+        run: echo "result=successiko" >> $GITHUB_OUTPUT
