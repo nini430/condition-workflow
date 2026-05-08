@@ -1,0 +1,34 @@
+name: Reuse Reusable Workflow
+on:
+  push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Get code
+         uses: actions/checkout@v6
+       - name: Cache dependencies
+         id: cache
+         uses: actions/cache@v5
+         with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+       - name: Install dependencies
+         run: npm install
+       - name: Test code
+         id: npm-tests
+         run: npm run test
+  reuse:
+    needs: test
+    uses: ./github/workflows/reusable-workflow.yml
+    with:
+      artifact-name: nini_is_awesome
+    secrets:
+      nini_token: ${{ secrets.NINI_TOKEN }}
+  print-output:
+    needs: reuse
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print output from reusable workflow
+        run: echo ${{ toJson(needs.reuse.outputs) }}
+  

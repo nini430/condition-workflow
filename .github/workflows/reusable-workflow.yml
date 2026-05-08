@@ -1,0 +1,28 @@
+name: Reusable Workflow
+on: 
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: 'Name of the artifact to upload'
+        required: true
+        type: string
+        default: dist
+    secrets:
+      nini_token:
+        description: 'Token for authentication'
+        required: true
+    outputs:
+      result:
+        description: 'Result of the workflow'
+        value: ${{ jobs.deploy.outputs.outcome }}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      outcome: ${{ steps.set-output.outputs.result }}
+    steps:
+      - name: Get the input
+        run: echo  "Artifact name ${{ inputs.artifact-name }}"
+      - name: output the output
+        id: set-output
+        run: echo "result=success" >> $GITHUB_OUTPUT
