@@ -12,9 +12,9 @@ on:
         description: 'Token for authentication'
         required: true
     outputs:
-      result:
+      niniko:
         description: 'Result of the workflow'
-        value: ${{ jobs.deploy.outputs.outcome }}
+        value: oh_my_gaga
 jobs:
   deploy:
     runs-on: ubuntu-latest
