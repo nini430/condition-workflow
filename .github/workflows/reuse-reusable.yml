@@ -20,7 +20,7 @@ jobs:
          run: npm run test
   reuse:
     needs: test
-    uses: .github/workflows/reusable-workflow.yml@main
+    uses: ./github/workflows/reusable-workflow.yml@main
     with:
       artifact-name: nini_is_awesome
     secrets:
