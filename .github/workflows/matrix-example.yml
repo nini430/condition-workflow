@@ -1,0 +1,24 @@
+name: Matrix Example Workflow
+on:
+  push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14,16]
+        operating-system: [ubuntu-latest, windows-latest]
+    steps:
+       - name: Get code
+         uses: actions/checkout@v6
+       - name: Cache dependencies
+         id: cache
+         uses: actions/cache@v5
+         with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+       - name: Install dependencies
+         run: npm install
+       - name: Test code
+         id: npm-tests
+         run: npm run test
